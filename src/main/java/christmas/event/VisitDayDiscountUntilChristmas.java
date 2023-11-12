@@ -2,11 +2,11 @@ package christmas.event;
 
 import java.util.function.Function;
 
-public class DailyDiscountUntilChristmas {
+public class VisitDayDiscountUntilChristmas {
 
-    Function<Integer, Function<Double, Double>> applyDailyDiscount = date -> total -> {
+    public static Function<Integer, Function<Integer, Integer>> applyDailyDiscount = date -> total -> {
         if (date <= 25) {
-            double discount = 1000 + (date - 1) * 100;
+            Integer discount = 1000 + (date - 1) * 100;
             return total - discount;
         }
         return total;
