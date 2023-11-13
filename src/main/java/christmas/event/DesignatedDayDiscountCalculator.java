@@ -4,7 +4,7 @@ import static christmas.event.dateChecker.isSundayOrChristmas;
 
 import java.util.function.Function;
 
-public class VisitDayDiscountUntilChristmas {
+public class DesignatedDayDiscountCalculator {
     public final static int SPECIAL_DAY_DISCOUNT_AMOUNT = 1000;
 
     public static Integer applyDailyDiscount(Integer price, Integer date){
