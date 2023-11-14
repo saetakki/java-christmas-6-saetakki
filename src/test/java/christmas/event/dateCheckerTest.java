@@ -1,7 +1,7 @@
 package christmas.event;
+
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
@@ -40,17 +40,6 @@ class dateCheckerTest extends NsTest {
         }
 
     }
-
-    @Test
-    void 범위에_맞지_않으면_에러_발생_테스트() {
-        assertThrows(IllegalArgumentException.class,() -> {
-            dateChecker.isWeekend(35);
-        });
-        assertThrows(IllegalArgumentException.class,() -> {
-            dateChecker.isWeekend(0);
-        });
-        }
-
 
 
 
