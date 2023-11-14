@@ -33,21 +33,21 @@ public class OutputView {
                         .map(entry -> entry.getKey() + " " + entry.getValue() + "개")
                         .collect(Collectors.joining("\n\n"));
 
-        print.accept(orderText+"\n");
+        System.out.println(orderText+"\n");
     }
 
     //할인 전 총주문 금액
     public static void printOriginalPrice(String message, int price) {
-        print.accept(message+"\n"+formatPrice(price)+"\n");
+        System.out.println(message+"\n"+formatPrice(price)+"\n");
     }
     //증정 메뉴
     public static void printGiftEligibility(PriceResult priceResult){
         String giftMessage = OutputMessage.SHOW_NOTHING.getMessage();
-        print.accept(OutputMessage.SHOW_GIFT_TITLE.getMessage());
+        System.out.println(OutputMessage.SHOW_GIFT_TITLE.getMessage());
         if(priceResult.getGift()){
             giftMessage = GIFT+ " 1개";
         }
-        print.accept(giftMessage+"\n");
+        System.out.println(giftMessage+"\n");
     }
 
 
