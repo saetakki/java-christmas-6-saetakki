@@ -16,7 +16,7 @@ public class PriceController {
         int totalCost = calculateTotalOriginalPrice(cart);
         int totalDiscountCost = calculateTotalDiscountedPrice(cart, date);
         int includeGiftPrice = calculateGiftPrice(totalDiscountCost,GIFT);
-        return new PriceResult(totalCost, totalDiscountCost,includeGiftPrice);
+        return new PriceResult(date, totalCost, totalDiscountCost,includeGiftPrice);
     }
 
 };
