@@ -3,7 +3,7 @@ package christmas.event;
 import static christmas.event.dateChecker.isSundayOrChristmas;
 import java.util.function.Function;
 
-public class DesignatedDayDiscountCalculator {
+public class SpecialDayDiscountCalculator {
     public final static int SPECIAL_DAY_DISCOUNT_AMOUNT = 1000;
 
     public static Integer applyChristmasDdayDiscount(Integer price, Integer date){
