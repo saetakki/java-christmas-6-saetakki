@@ -1,11 +1,8 @@
 package christmas.data;
 
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Foods {
 
@@ -15,7 +12,7 @@ public class Foods {
         시저샐러드("시저샐러드", "Appetizer", 8000),
         티본스테이크("티본스테이크", "MainCourse", 55000),
         바비큐립("바비큐립", "MainCourse", 54000),
-        해산물파스타("해산물파스타", "MainCourse", 35000),
+        해산물파스타("해산물파스타", "MainCourse", 35000) ,
         크리스마스파스타("크리스마스파스타", "MainCourse", 25000),
         초코케이크("초코케이크", "Dessert", 15000),
         아이스크림("아이스크림", "Dessert", 5000),
