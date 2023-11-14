@@ -1,4 +1,4 @@
-package christmas.event.data;
+package christmas.data;
 import static christmas.data.Foods.FoodItem.getPriceOfMenu;
 import static christmas.data.Foods.FoodItem.isExistMenu;
 import static christmas.data.Foods.FoodItem.isMainCourseOrDessert;
