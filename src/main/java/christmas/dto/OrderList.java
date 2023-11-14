@@ -13,8 +13,8 @@ public class OrderList {
         this.items.put(menu, quantity);
     }
 
-    public Map<String, Integer> getItems(){
-        return items;
+    public Map<String, Integer> getItems() {
+        return new HashMap<>(items);
     }
 
 }
