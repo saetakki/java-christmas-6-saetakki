@@ -71,7 +71,8 @@ public class Constants {
         }
     }
     public static int DISCOUNT_AMOUNT = 2023;
-    public static int MINIMUM_SPEND_FOR_CHAMPAGNE = 120000;
+    public static int MINIMUM_SPEND_FOR_GIFT = 120000;
+    public static int MINIMUM_SPEND_FOR_EVENT = 10000;
 
     public static List<Integer> GRADE_PRICE = List.of(5000, 10000, 20000);
     public static List<String> BADGES = List.of("별", "트리", "산타");

@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 
 public class InputValidator {
 
+
+
     private static final Predicate<String> isPositiveInteger = input ->{
         try{
             return Integer.parseInt(input)>0;
@@ -18,7 +20,7 @@ public class InputValidator {
         }
     };
 
-    private static final Predicate<String> isWithinRange(int lowerBound, int upperBound) {
+    public static final Predicate<String> isWithinRange(int lowerBound, int upperBound) {
         return input -> {
             try {
                 int number = Integer.parseInt(input);
@@ -29,7 +31,7 @@ public class InputValidator {
         };
     };
 
-    private static final Predicate<String> isValidMenuInputForm =
+    public static final Predicate<String> isValidMenuInputForm =
             menuInput -> Pattern.compile("^\\s*[가-힣\\s]+-\\d+(\\s*,\\s*[가-힣\\s]+-\\d+)*\\s*$").matcher(menuInput).matches();
 
     public static final Predicate<String> isMenuAvailable =

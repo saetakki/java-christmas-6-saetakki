@@ -32,11 +32,12 @@ public class EventValidator {
         );
     }
 
-    public static void validateQuantityDoesNotExceed(String menuInput, int maxQuantity) {
+    public static boolean validateQuantityDoesNotExceed(String menuInput, int maxQuantity) {
         validateTemplate(
                 withinMaxQuantity(maxQuantity),
                 menuInput,
                 () -> new IllegalArgumentException(ErrorMessage.INVALID_ORDER.getMessage())
         );
+        return false;
     }
 }

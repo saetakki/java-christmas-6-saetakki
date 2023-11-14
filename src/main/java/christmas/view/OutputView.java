@@ -1,18 +1,17 @@
 package christmas.view;
 
 import static christmas.Constants.GIFT;
-import static christmas.Constants.MINIMUM_SPEND_FOR_CHAMPAGNE;
 import static christmas.Constants.OutputMessage.SHOW_DISCOUNT_SUMMARY;
-import static christmas.Constants.OutputMessage.SHOW_GIFT_TITLE;
 import static christmas.data.Foods.FoodItem.getPriceOfMenu;
 import static christmas.event.BadgeCalculator.badgeCalculator;
+import static christmas.event.DiscountConditionChecker.isEligibleForEvent;
 import static christmas.event.SpecialDayDiscountCalculator.applyChristmasDdayDiscount;
 import static christmas.event.SpecialDayDiscountCalculator.applySpecialDayDiscount;
 import static christmas.event.dateChecker.todayIs;
 
 import christmas.Constants.OutputMessage;
 import christmas.dto.OrderList;
-import java.util.Optional;
+import christmas.dto.PriceResult;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -28,28 +27,29 @@ public class OutputView {
 
     public static Consumer<String> print = System.out::println;
 
-
+    //주문 메뉴
     public static void printOrder(OrderList orderList){
-        String orderText = "<주문 메뉴>\n" +
-                orderList.getItems().entrySet().stream()
+        String orderText = orderList.getItems().entrySet().stream()
                         .map(entry -> entry.getKey() + " " + entry.getValue() + "개")
-                        .collect(Collectors.joining("\n"));
-        print.accept(orderText);
+                        .collect(Collectors.joining("\n\n"));
+
+        print.accept(orderText+"\n");
     }
 
-
-    public static void printPrice(String message, int price) {
-        print.accept(message+"\n"+formatPrice(price));
-
+    //할인 전 총주문 금액
+    public static void printOriginalPrice(String message, int price) {
+        print.accept(message+"\n"+formatPrice(price)+"\n");
+    }
+    //증정 메뉴
+    public static void printGiftEligibility(PriceResult priceResult){
+        String giftMessage = OutputMessage.SHOW_NOTHING.getMessage();
+        print.accept(OutputMessage.SHOW_GIFT_TITLE.getMessage());
+        if(priceResult.getGift()){
+            giftMessage = GIFT+ " 1개";
+        }
+        print.accept(giftMessage+"\n");
     }
 
-    public static void printGiftList(int originalPrice, String gift) {
-        String msg = Optional.of(originalPrice)
-                .filter(price -> price >= MINIMUM_SPEND_FOR_CHAMPAGNE)
-                .map(price -> gift + " 1개")
-                .orElse(OutputMessage.SHOW_NOTHING.getMessage());
-        print.accept(SHOW_GIFT_TITLE.getMessage() + "\n" + msg);
-    }
 
 
     @FunctionalInterface
@@ -57,14 +57,15 @@ public class OutputView {
         String getDiscountDetail();
     }
 
-    public static void printDiscountList(int originalPrice, int discountedPrice, int date){
-        String discountDetails = getDiscountDetails(originalPrice, discountedPrice, date);
+    //혜택 내역
+    public static void printDiscountList(int originalPrice, int discountedPrice, int date, OrderList orderList){
+        String discountDetails = getDiscountDetails(originalPrice, discountedPrice, date, orderList);
         System.out.println(SHOW_DISCOUNT_SUMMARY.getMessage());
         String discountList = discountDetails;
         if(discountDetails.isEmpty()){
             discountList="없음";
         }
-        System.out.println(discountList);
+        System.out.println(discountList+"\n");
     }
 
     private static String getDiscountDetail(DiscountDetailProvider provider) {
@@ -89,11 +90,11 @@ public class OutputView {
 
 
 
-    private static String getDiscountDetails(int originalPrice, int discountedPrice, int date){
+    private static String getDiscountDetails(int originalPrice, int discountedPrice, int date, OrderList orderList){
         String details = getDdayDiscountDetail(date)
                 + getMainOrDessertDiscountDetail(originalPrice, discountedPrice, date)
                 + getSpecialDayDiscountDetail(date)
-                + getChampagneEventDetail(originalPrice);
+                + getChampagneEventDetail(originalPrice, orderList);
 
         return details.trim();
     }
@@ -121,10 +122,10 @@ public class OutputView {
         });
     }
 
-    private static String getChampagneEventDetail(int originalPrice){
+    private static String getChampagneEventDetail(int originalPrice, OrderList orderList){
         return getDiscountDetail(() -> {
             int giftPrice = getPriceOfMenu(GIFT);
-            if (originalPrice >= MINIMUM_SPEND_FOR_CHAMPAGNE) {
+            if (isEligibleForEvent(originalPrice, orderList)) {
                 return "증정 이벤트: " + formatPrice(giftPrice*-1);
             }
             return "";
@@ -133,28 +134,18 @@ public class OutputView {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public static void printDiscountAmount(String message, int originaPrice,int includeGiftPrice) {
+    public static void printDiscountAmount(String message, Integer originalPrice, Integer discountedPrice, boolean getGift) {
         System.out.println(message);
-        System.out.println(formatPrice(includeGiftPrice-originaPrice));
+        Integer totalDiscountAmount = discountedPrice-originalPrice;
+        if(getGift){
+           totalDiscountAmount -= getPriceOfMenu(GIFT);
+        }
+        System.out.println(formatPrice(totalDiscountAmount));
     }
 
-    public static void printBadge(int originalPrice,int includeGiftPrice) {
+    public static void printBadge(int originalPrice,int discountedPrice, boolean getGift) {
         System.out.println(OutputMessage.SHOW_BADGE.getMessage());
-        String badge = badgeCalculator(originalPrice,includeGiftPrice);
+        String badge = badgeCalculator(originalPrice,discountedPrice, getGift);
         System.out.println(badge);
     }
 

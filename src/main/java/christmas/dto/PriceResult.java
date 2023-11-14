@@ -4,13 +4,13 @@ public class PriceResult {
     private final Integer date;
     private final Integer originalPrice;
     private final Integer discountedPrice;
-    private final Integer includeGiftPrice;
+    private final boolean isGiftEligible;
 
-    public PriceResult( Integer date, Integer originalPrice, Integer discountedPrice, Integer includeGiftPrice){
+    public PriceResult( Integer date, Integer originalPrice, Integer discountedPrice, boolean isGiftEligible){
         this.date = date;
         this.originalPrice = originalPrice;
         this.discountedPrice = discountedPrice;
-        this.includeGiftPrice = includeGiftPrice;
+        this.isGiftEligible = isGiftEligible;
     }
 
 
@@ -21,5 +21,5 @@ public class PriceResult {
     public Integer getDiscountedPrice(){
         return discountedPrice;
     }
-    public Integer getIncludeGiftPrice(){ return includeGiftPrice;}
+    public Boolean getGift() { return isGiftEligible; }
 }

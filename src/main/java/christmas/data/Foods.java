@@ -68,7 +68,13 @@ public class Foods {
             }
             return foodItem.getPrice();
         }
-
+        public static String getTypeOfMenu(String name) {
+            FoodItem foodItem = FOOD_NAME_MAP.get(name);
+            if (foodItem != null) {
+                return foodItem.getType();
+            }
+            return "Unknown";
+        }
 
     }
 

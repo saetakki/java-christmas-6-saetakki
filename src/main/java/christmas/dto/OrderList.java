@@ -1,5 +1,6 @@
 package christmas.dto;
 
+import christmas.data.Foods.FoodItem;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +16,16 @@ public class OrderList {
 
     public Map<String, Integer> getItems() {
         return new HashMap<>(items);
+    }
+
+    public boolean isBeverageOnly() {
+        for (String menuItem : items.keySet()) {
+            String category = FoodItem.getTypeOfMenu(menuItem);
+            if (!"Beverage".equals(category)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }
