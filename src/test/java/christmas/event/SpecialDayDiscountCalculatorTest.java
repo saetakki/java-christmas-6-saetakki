@@ -17,7 +17,7 @@ class DesignatedDayDiscountCalculatorTest extends NsTest {
 
         for(Integer date: dateList){
             int expectedDiscountAmount = 1000 + (date-1)*100;
-            int actualDiscountAmount = DesignatedDayDiscountCalculator.applyDailyDiscount(0, date);
+            int actualDiscountAmount = DesignatedDayDiscountCalculator.applyChristmasDdayDiscount(0, date);
             assertEquals(expectedDiscountAmount+actualDiscountAmount, 0);
         }
     }
@@ -26,7 +26,7 @@ class DesignatedDayDiscountCalculatorTest extends NsTest {
         List<Integer> dateList = Randoms.pickUniqueNumbersInRange(26, 31, 6);
         int TotalPrice = 10000;
         for(Integer date: dateList){
-            int actualDiscountAmount = DesignatedDayDiscountCalculator.applyDailyDiscount(TotalPrice, date);
+            int actualDiscountAmount = DesignatedDayDiscountCalculator.applyChristmasDdayDiscount(TotalPrice, date);
             assertEquals(actualDiscountAmount, 10000);
         }
     }
