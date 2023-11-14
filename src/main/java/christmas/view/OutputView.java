@@ -2,6 +2,9 @@ package christmas.view;
 
 import static christmas.Constants.GIFT;
 import static christmas.Constants.OutputMessage.SHOW_DISCOUNT_SUMMARY;
+import static christmas.Constants.OutputMessage.SHOW_ORIGINAL_PRICE_TITLE;
+import static christmas.Constants.OutputMessage.SHOW_TOTAL_DISCOUNT_AMOUNT;
+import static christmas.Constants.OutputMessage.SHOW_DISCOUNTED_PRICE_TITLE;
 import static christmas.data.Foods.FoodItem.getPriceOfMenu;
 import static christmas.event.BadgeCalculator.badgeCalculator;
 import static christmas.event.DiscountConditionChecker.isEligibleForEvent;
@@ -16,6 +19,7 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
+
     // 인사말 출력
     public static void printGreetingMessage(){
         System.out.println(OutputMessage.GREETING_MESSAGE.getMessage());
@@ -23,7 +27,24 @@ public class OutputView {
 
     // 메뉴판을 출력하는 함수
     public static void printMenu(){
-    System.out.println(OutputMessage.SHOW_MENU.getMessage());
+        System.out.println(OutputMessage.SHOW_MENU.getMessage());
+    }
+
+    public static void printPriceDetails(PriceResult priceResult) {
+        // 할인 전 총주문 금액
+        printOriginalPrice(SHOW_ORIGINAL_PRICE_TITLE.getMessage(),priceResult.getOriginalPrice());
+        // 증정 메뉴
+        // 어떤 증정품을 받았는지 출력하는 함수
+        printGiftEligibility(priceResult);
+    }
+    public static void printDiscountDetails(PriceResult priceResult, OrderList orderList, int date) {
+        printDiscountList(priceResult.getOriginalPrice(), priceResult.getDiscountedPrice(), date, orderList, priceResult.getGift());
+    }
+
+    public static void printFinalPriceAndBadge(PriceResult priceResult) {
+        printDiscountAmount(SHOW_TOTAL_DISCOUNT_AMOUNT.getMessage(), priceResult.getOriginalPrice(), priceResult.getDiscountedPrice(), priceResult.getGift());
+        printOriginalPrice(SHOW_DISCOUNTED_PRICE_TITLE.getMessage(), priceResult.getDiscountedPrice());
+        printBadge(priceResult.getOriginalPrice(), priceResult.getDiscountedPrice(), priceResult.getGift());
     }
 
 
@@ -31,8 +52,8 @@ public class OutputView {
     // 메뉴-수량 형태로 되어있는 orderList를 입력받아 map으로 순회하면서 "메뉴 n개" 형태의 문자열로 재조합
     public static void printOrder(OrderList orderList){
         String orderText = orderList.getItems().entrySet().stream()
-                        .map(entry -> entry.getKey() + " " + entry.getValue() + "개")
-                        .collect(Collectors.joining("\n"));
+                .map(entry -> entry.getKey() + " " + entry.getValue() + "개")
+                .collect(Collectors.joining("\n"));
         System.out.println(orderText+"\n");
     }
 
@@ -161,7 +182,7 @@ public class OutputView {
         System.out.println(message);
         Integer totalDiscountAmount = discountedPrice-originalPrice;
         if(isGiftEligible){
-           totalDiscountAmount -= getPriceOfMenu(GIFT);
+            totalDiscountAmount -= getPriceOfMenu(GIFT);
         }
         System.out.println(formatPrice(totalDiscountAmount)+"\n");
     }
@@ -175,7 +196,7 @@ public class OutputView {
         System.out.println(badge);
     }
 
-   // 3자리마다 쉼표를 찍는 포맷
+    // 3자리마다 쉼표를 찍는 포맷
     public static String formatPrice(int price) {
         return String.format("%,d원", price);
     }
