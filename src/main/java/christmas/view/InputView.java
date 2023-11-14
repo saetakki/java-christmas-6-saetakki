@@ -22,6 +22,7 @@ public class InputView {
     public static String inputMenu(){
         return inputWithValidationsReturnString(InputMessage.INPUT_MENU.getMessage(),
             input -> {
+                System.out.println(input);
                 validateMenuInputForm(input);
                 validateUniqueItems(input);
                 validateQuantityDoesNotExceed(input, 20);

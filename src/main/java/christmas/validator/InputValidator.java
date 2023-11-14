@@ -56,6 +56,7 @@ public class InputValidator {
     }
 
     public static boolean validateWithinRange(String input, int lowerBound, int upperBound) {
+        System.out.println(input);
         isPositiveInteger.test(input);
         Predicate<String> withinRange = isWithinRange(lowerBound, upperBound);
         validateTemplate(

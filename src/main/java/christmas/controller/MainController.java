@@ -3,7 +3,6 @@ package christmas.controller;
 import static christmas.Constants.OutputMessage.SHOW_DISCOUNTED_PRICE_TITLE;
 import static christmas.Constants.OutputMessage.SHOW_ORIGINAL_PRICE_TITLE;
 import static christmas.Constants.OutputMessage.SHOW_TOTAL_DISCOUNT_AMOUNT;
-import static christmas.view.OutputView.print;
 import static christmas.view.OutputView.printBadge;
 import static christmas.view.OutputView.printDiscountAmount;
 import static christmas.view.OutputView.printDiscountList;
@@ -19,7 +18,7 @@ import christmas.view.InputView;
 
 public class MainController {
     private static void printOrderDetails(PriceResult priceResult, OrderList orderList, Integer date){
-        print.accept("<주문 메뉴>\n");
+        System.out.println("<주문 메뉴>\n");
         // 주문 메뉴
         printOrder(orderList);
         //할인 전 총주문 금액
@@ -42,11 +41,6 @@ public class MainController {
         int date = InputView.inputVisitDay();
         String order = InputView.inputMenu();
         System.out.println('\n');
-
-//        int date = simpleInput();
-//        String order = simpleMenuInput();
-//
-
 
         OrderList orderList = OrderController.createOrderListFromInput(order);
         PriceResult priceResult = PriceController.calculatePrice(orderList, date);
