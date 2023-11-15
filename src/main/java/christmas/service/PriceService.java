@@ -1,4 +1,4 @@
-package christmas.controller;
+package christmas.service;
 
 import static christmas.Constants.MINIMUM_SPEND_FOR_GIFT;
 import static christmas.event.CostCalculator.calculateTotalOriginalPrice;
@@ -8,7 +8,7 @@ import static christmas.event.DiscountConditionChecker.isEligibleForEvent;
 import christmas.dto.OrderList;
 import christmas.dto.PriceResult;
 
-public class PriceController {
+public class PriceService {
 
     // 총 원가, 할인이 적용된 총액, 증정품 수령 여부를 계산
     public static PriceResult calculatePrice(OrderList orderList, int date) {
