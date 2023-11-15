@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class Foods {
 
+    // 판매하는 음식들을 담은 enum
     public enum FoodItem {
         양송이수프("양송이수프", "Appetizer", 6000),
         타파스("타파스", "Appetizer", 5500),
@@ -29,19 +30,19 @@ public class Foods {
             this.type = type;
             this.price = price;
         }
-
+        // 음식 이름 반환
         public String getName() {
             return name;
         }
-
+        // 음식 종류 반환
         public String getType() {
             return type;
         }
-
+        // 음식 가격 반환
         public Integer getPrice() {
             return price;
         }
-
+        // 음식 이름과 FoodItem 매핑을 가진 불변 Map 생성
         private static final Map<String, FoodItem> FOOD_NAME_MAP;
 
         static {
@@ -51,16 +52,16 @@ public class Foods {
             }
             FOOD_NAME_MAP = Collections.unmodifiableMap(map);
         }
-
+        // 입력받은 음식이 판매하는 음식인지 확인하는 메서드
         public static boolean isExistMenu(String menu){
             return FOOD_NAME_MAP.containsKey(menu);
         }
-
+        // 입력받은 음식이 메인코스 혹은 디저트인지 확인하는 메서드
         public static boolean isMainCourseOrDessert(String name){
             FoodItem foodItem = FOOD_NAME_MAP.get(name);
             return foodItem != null && ("MainCourse".equals(foodItem.getType()) || "Dessert".equals(foodItem.getType()));
         }
-
+        // 입력받은 음식의 가격을 불러오는 메서드
         public static Integer getPriceOfMenu(String name){
             FoodItem foodItem = FOOD_NAME_MAP.get(name);
             if (foodItem==null){
@@ -68,6 +69,7 @@ public class Foods {
             }
             return foodItem.getPrice();
         }
+        // 입력받은 음식의 종류를 불러오는 메서드(eg. 제로콜라 -> Beverage)
         public static String getTypeOfMenu(String name) {
             FoodItem foodItem = FOOD_NAME_MAP.get(name);
             if (foodItem != null) {
