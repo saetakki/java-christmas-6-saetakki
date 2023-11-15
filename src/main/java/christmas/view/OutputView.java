@@ -30,6 +30,7 @@ public class OutputView {
     public static void printInitialMessage(){
         printGreetingMessage();
         printMenu();
+        printMessage(OutputMessage.SHOW_NOTICE.getMessage());
     }
 
 
@@ -41,6 +42,9 @@ public class OutputView {
     // 메뉴판을 출력하는 함수
     public static void printMenu(){
         System.out.println(OutputMessage.SHOW_MENU.getMessage());
+    }
+    public static void printMessage(String Message){
+        System.out.print(Message);
     }
 
     public static void printPriceDetails(PriceResult priceResult) {
