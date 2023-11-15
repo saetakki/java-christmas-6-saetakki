@@ -3,6 +3,8 @@ package christmas;
 import java.util.List;
 
 public class Constants {
+
+    // 에러 관련 에러메세지와 prefix
     private static final String ERROR_PREFIX = "[ERROR] ";
     public enum ErrorMessage {
         INVALID_DATE("유효하지 않은 날짜입니다. 다시 입력해 주세요."),
@@ -19,6 +21,7 @@ public class Constants {
         }
     }
 
+    // Input 관련 메세지가 담겨있는 enum
     public enum InputMessage {
         INPUT_DATE("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)"),
         INPUT_MENU("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
@@ -34,6 +37,7 @@ public class Constants {
         }
     }
 
+    // 출력과 관련있는 메세지들이 모여있는 enum
     public enum OutputMessage {
         GREETING_MESSAGE("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다."),
 
@@ -76,12 +80,20 @@ public class Constants {
             return this.message;
         }
     }
+
+    // 평일/주말 이벤트 할인 때 적용될 이벤트 할인가
     public static int DISCOUNT_AMOUNT = 2023;
+    // 증정품을 받기 위한 최소 소비 금액
     public static int MINIMUM_SPEND_FOR_GIFT = 120000;
+    // 이벤트에 참여하기 위해 필요한 최소 소비 금액
     public static int MINIMUM_SPEND_FOR_EVENT = 10000;
 
+    // 뱃지 등급별 최소 금액
     public static List<Integer> GRADE_PRICE = List.of(5000, 10000, 20000);
+
+    // 뱃지 리스트
     public static List<String> BADGES = List.of("별", "트리", "산타");
 
+    // 증정품으로 수여되는 품목
     public static String GIFT = "샴페인";
 }

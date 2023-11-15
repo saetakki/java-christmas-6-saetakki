@@ -43,6 +43,7 @@ public class OutputView {
     public static void printMenu(){
         System.out.println(OutputMessage.SHOW_MENU.getMessage());
     }
+    // 일반 출력 메세지 함수
     public static void printMessage(String Message){
         System.out.print(Message);
     }
@@ -54,10 +55,13 @@ public class OutputView {
         // 어떤 증정품을 받았는지 출력하는 함수
         printGiftEligibility(priceResult);
     }
+
+    // priceResult와 orderList, date를 입력받아 printDiscountList 항목들을 출력
     public static void printDiscountDetails(PriceResult priceResult, OrderList orderList, int date) {
         printDiscountList(priceResult.getOriginalPrice(), priceResult.getDiscountedPrice(), date, orderList, priceResult.getGift());
     }
 
+    // priceResult를 입력받아 최종 할인금액, 최종 원가, 뱃지수여 여부를 출력하는 메서드
     public static void printFinalPriceAndBadge(PriceResult priceResult) {
         printDiscountAmount(SHOW_TOTAL_DISCOUNT_AMOUNT.getMessage(), priceResult.getOriginalPrice(), priceResult.getDiscountedPrice(), priceResult.getGift());
         printOriginalPrice(SHOW_DISCOUNTED_PRICE_TITLE.getMessage(), priceResult.getDiscountedPrice());

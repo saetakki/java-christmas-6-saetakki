@@ -18,5 +18,4 @@ public class CostCalculator {
     // getPriceOfMenu를 통해 해당 항목의 원가를 호출하고 수량(entry.getValue())를 곱해 항목 총액을 계산
     public static Function<Entry<String, Integer>, Integer> calculateOriginalPricePerItem =
             entry -> getPriceOfMenu(entry.getKey()) * entry.getValue();
-
 }
