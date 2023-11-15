@@ -19,7 +19,7 @@ public class InputView {
     }
 
 
-    public static String inputMenu(){
+    public static String inputOrderMenu(){
         return inputWithValidationsReturnString(InputMessage.INPUT_MENU.getMessage(),
             input -> {
                 System.out.println(input);

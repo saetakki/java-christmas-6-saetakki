@@ -19,6 +19,19 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
+    public static void printOrderDetails(PriceResult priceResult, OrderList orderList, Integer date) {
+        System.out.println("<주문 메뉴>");
+        printOrder(orderList);
+        printPriceDetails(priceResult);
+        printDiscountDetails(priceResult, orderList, date);
+        printFinalPriceAndBadge(priceResult);
+    }
+
+    public static void printInitialMessage(){
+        printGreetingMessage();
+        printMenu();
+    }
+
 
     // 인사말 출력
     public static void printGreetingMessage(){
